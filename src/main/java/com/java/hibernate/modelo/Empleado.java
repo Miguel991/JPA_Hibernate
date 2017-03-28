@@ -3,16 +3,23 @@ package com.java.hibernate.modelo;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name= "EMPLEADO")
 public class Empleado implements Serializable {
 
 	private static final long serialVersionUID = -7543286950807923622L;
+	@OneToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "ID_DIRECCION")
+	private Direccion direccion;
 	
 	@Id
 	@Column(name = "COD_EMPLEADO")
@@ -69,14 +76,20 @@ public class Empleado implements Serializable {
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+	
+	public Direccion getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
 
 	@Override
 	public String toString() {
-		return "Empleado [codigo=" + codigo + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNacimiento="
-				+ fechaNacimiento + "]";
+		return "Empleado [direccion=" + direccion + ", codigo=" + codigo + ", apellido=" + apellido + ", nombre="
+				+ nombre + ", fechaNacimiento=" + fechaNacimiento + "]";
 	}
 	
 	
 	
-
 }

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.java.hibernate.modelo.Direccion;
 import com.java.hibernate.modelo.Empleado;
 
 public class TestEmpleados {
@@ -32,6 +33,7 @@ public class TestEmpleados {
 		//Block of transactions
 		manager.getTransaction().begin();
 		Empleado e = manager.find(Empleado.class, 10L);
+		e.setDireccion(new Direccion(15L, "calle 12", "villa Crespo", "Buenos Aires", "Argentina"));
 		e.setApellido("Mehert");
 		e.setNombre("Gilberto");
 		manager.getTransaction().commit();
