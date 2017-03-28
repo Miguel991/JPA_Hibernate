@@ -29,7 +29,7 @@ public class TestEmpleados {
 		imprimirTodo();
 		
 		
-		//Bloque de transaccion
+		//Block of transactions
 		manager.getTransaction().begin();
 		Empleado e = manager.find(Empleado.class, 10L);
 		e.setApellido("Mehert");
@@ -39,6 +39,22 @@ public class TestEmpleados {
 		imprimirTodo();
 		//close the manager when not in use
 		manager.close();
+		
+		//Once we close the entity manager the entities are left
+		//without any manager so with the merge method we can
+		//re-administer the object of Empleado type
+		
+		manager = emf.createEntityManager();
+		manager.getTransaction().begin();
+		//re-administer the object Empleado type
+		e = manager.merge(e);
+		//rename
+		e.setNombre("JUAN");
+		//delete the object from the database
+		manager.remove(e);
+		manager.getTransaction().commit();
+		manager.close();
+		imprimirTodo();
 	}
 	private static void insertInicial() {
 		Empleado e = new Empleado(10L,"Perez","Pepito",new GregorianCalendar(1979,6,6).getTime());
@@ -59,6 +75,7 @@ public class TestEmpleados {
 	}
 	@SuppressWarnings("unchecked")
 	private static void imprimirTodo(){
+		manager = emf.createEntityManager();
 		List<Empleado> emps = (List<Empleado>)manager.createQuery("FROM Empleado").getResultList();
 		System.out.println("Hay "+emps.size()+" empleados en el sistema.");
 		for(Empleado emp:emps){
