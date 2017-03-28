@@ -24,6 +24,23 @@ public class TestEmpleados {
 		System.out.println("En esta base de datos hay "+empleados.size()+" empleados");
 		*/
 		
+		insertInicial();
+		
+		imprimirTodo();
+		
+		
+		//Bloque de transaccion
+		manager.getTransaction().begin();
+		Empleado e = manager.find(Empleado.class, 10L);
+		e.setApellido("Mehert");
+		e.setNombre("Gilberto");
+		manager.getTransaction().commit();
+		
+		imprimirTodo();
+		//close the manager when not in use
+		manager.close();
+	}
+	private static void insertInicial() {
 		Empleado e = new Empleado(10L,"Perez","Pepito",new GregorianCalendar(1979,6,6).getTime());
 		Empleado i = new Empleado(9L,"Gates","Jose",new GregorianCalendar(1979,6,9).getTime());
 		Empleado a = new Empleado(2L,"william","Antonio",new GregorianCalendar(1979,6,8).getTime());
@@ -39,8 +56,6 @@ public class TestEmpleados {
 		manager.persist(u);
 
 		manager.getTransaction().commit();
-		
-		imprimirTodo();
 	}
 	@SuppressWarnings("unchecked")
 	private static void imprimirTodo(){
