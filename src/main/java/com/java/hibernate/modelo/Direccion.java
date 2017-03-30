@@ -2,7 +2,9 @@ package com.java.hibernate.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,9 @@ public class Direccion {
 	
 	@Column(name = "PROVINCIA")
 	private String provincia;
+	
+	@OneToOne(mappedBy = "direccion", fetch = FetchType.LAZY)
+	private Empleado empleado;
 	
 	@Column(name = "PAIS")
 	private String pais;
@@ -75,11 +80,19 @@ public class Direccion {
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
+	
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+	
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
 
 	@Override
 	public String toString() {
 		return "Direccion [id=" + id + ", direccion=" + direccion + ", localidad=" + localidad + ", provincia="
-				+ provincia + ", pais=" + pais + "]";
+				+ provincia + ", pais=" + pais +"Codigo Empleado ="+empleado.getCodigo()+"]";
 	}
 	
 }
