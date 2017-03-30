@@ -69,6 +69,19 @@ public class Autor {
 	public void setListaLibro(List<Libro> listaLibro) {
 		this.listaLibro = listaLibro;
 	}
+	private void addLibro(Libro libro) {
+		if(!listaLibro.contains(libro)){
+			listaLibro.add(libro);
+			libro.setAutor(this);
+		}
+	}
+	private void removeLibro(Libro libro) {
+		if(listaLibro.contains(libro)){
+			listaLibro.remove(libro);
+			libro.setAutor(null);
+		}
+
+	}
 
 	@Override
 	public String toString() {

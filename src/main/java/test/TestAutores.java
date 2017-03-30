@@ -23,12 +23,12 @@ public class TestAutores {
 	private static void imprimirDatos() {
 		EntityManager em = emf.createEntityManager();
 		
-		Autor autor = em.find(Autor.class, 2L);
-		List<Libro> libro = autor.getListaLibro();
+		//7Autor autor = em.find(Autor.class, 2L);
+		//List<Libro> libro = autor.getListaLibro();
 		
-		for(Libro libros : libro){
-			System.out.println("* "+libro.toString());
-		}
+		//for(Libro libros : libro){
+			//System.out.println("* "+libro.toString());
+		//}
  //		System.out.println(autor);
 		em.close();
 	}
