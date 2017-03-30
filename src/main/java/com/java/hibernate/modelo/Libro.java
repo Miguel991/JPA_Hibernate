@@ -2,7 +2,10 @@ package com.java.hibernate.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +19,10 @@ public class Libro {
 	@Column(name = "TITULO")
 	private String titulo;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AUTOR_ID")
 	private Autor autor;
+	
 	
 	public Libro(Long id, String titulo,Autor autor) {
 		this.id = id;
@@ -24,9 +30,7 @@ public class Libro {
 		this.autor = autor;
 	}
 	
-	public Libro(){
-		
-	}
+	public Libro(){}
 	
 	
 	public Long getId() {

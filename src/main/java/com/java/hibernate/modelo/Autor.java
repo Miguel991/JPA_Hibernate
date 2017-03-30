@@ -3,9 +3,11 @@ package com.java.hibernate.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,7 @@ public class Autor {
 	@Column(name = "NACIONALIDAD")
 	private String nacionalidad;
 	
+	@OneToMany(mappedBy =  "autor", cascade = CascadeType.ALL)
 	private List<Libro> listaLibro = new ArrayList<>();
 	
 	public Autor(){}
@@ -66,5 +69,11 @@ public class Autor {
 	public void setListaLibro(List<Libro> listaLibro) {
 		this.listaLibro = listaLibro;
 	}
+
+	@Override
+	public String toString() {
+		return "Autor [id=" + id + ", nombre=" + nombre + ", nacionalidad=" + nacionalidad + "]";
+	}
+	
 
 }
